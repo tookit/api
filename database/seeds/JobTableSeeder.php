@@ -19,7 +19,7 @@ class JobTableSeeder extends TableSeeder{
 
         $schedulerIds = Scheduler::where('id' ,'>' ,0)->pluck('id')->toArray();
         $artifactIds  = Artifact::where('id' ,'>' ,0)->pluck('id')->toArray();
-        foreach(range(1,50) as $index){
+        for($i = 0 ; $i <= 30;$i++){
 
             Job::create([
                 'scheduler_id' => $this->faker->randomElement($schedulerIds),
@@ -27,7 +27,7 @@ class JobTableSeeder extends TableSeeder{
                 'name' => $this->faker->text(20),
                 'description'=> $this->faker->realText(100),
                 'agent_key'=>$this->faker->md5,
-                'status'=>$this->faker->randomElements(['Ready','Scheduled'])
+                'status'=>$this->faker->randomElement(['Ready','Scheduled'])
 
             ]);
         }
