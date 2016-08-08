@@ -31,7 +31,7 @@ $app->group(['middleware' => 'jwt.auth'], function($app) {
         ];
     });
 
-    $app->get('/users','UserController@show');
+    $app->get('/users','App\Http\Controllers\UserController@show');
 
     $app->get('/jobs','App\Http\Controllers\JobController@show');
 

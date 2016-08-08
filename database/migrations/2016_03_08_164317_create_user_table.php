@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResourcesTable extends Migration
+class CreateUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,15 @@ class CreateResourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create('resources', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->string('email')->unique();
+            $table->string('password', 60);
+            $table->json('profile');
+            $table->rememberToken();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -27,7 +31,6 @@ class CreateResourcesTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('resources');
+        Schema::drop('user');
     }
 }

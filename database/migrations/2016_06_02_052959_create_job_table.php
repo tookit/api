@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobsTable extends Migration
+class CreateJobTable extends Migration
 {
 
 	/**
@@ -13,14 +13,14 @@ class CreateJobsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('jobs', function(Blueprint $table) {
+		Schema::create('job', function(Blueprint $table) {
             $table->increments('id');
             $table->char('agent_key',40);
             $table->integer('scheduler_id');
             $table->integer('artifact_id');
             $table->string('name')->unique();
             $table->text('description');
-            $table->enum('status',['Init','Scheduled','Running','Stopped'])->default('Init');
+            $table->enum('status',['Ready','Scheduled','Running','Completed'])->default('Ready');
             $table->softDeletes();
             $table->timestamps();
 		});
@@ -33,7 +33,7 @@ class CreateJobsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('jobs');
+		Schema::drop('job');
 	}
 
 }

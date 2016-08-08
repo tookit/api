@@ -16,6 +16,9 @@ class User extends Model implements
     use Authenticatable, Authorizable;
     use SoftDeletes;
 
+
+    protected $table = 'user';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -35,5 +38,13 @@ class User extends Model implements
     ];
 
     protected $dates = ['deleted_at'];
+
+
+    public function roles()
+    {
+
+        return $this->belongsToMany('App\Models\Role','role_user','user_id','role_id');
+
+    }
 
 }

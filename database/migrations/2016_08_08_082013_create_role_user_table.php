@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobArtifact extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateJobArtifact extends Migration
     public function up()
     {
         //
-        Schema::create('job_artifact', function (Blueprint $table) {
+        Schema::create('role_user',function(Blueprint $table){
+
             $table->increments('id');
-            $table->bigInteger('url');
-            $table->string('version');
-            $table->string('manifest');
-            $table->text('shellscript');
-            $table->softDeletes();
+            $table->integer('role_id');
+            $table->integer('user_id');
         });
     }
 
@@ -31,6 +29,6 @@ class CreateJobArtifact extends Migration
     public function down()
     {
         //
-        Schema::drop('job_artifact');
+        Schema::drop('role_user');
     }
 }

@@ -9,10 +9,10 @@
 namespace App\Repositories;
 
 
-use App\Models\Job;
+use App\Models\User;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class JobRepository extends BaseRepository {
+class UserRepository extends BaseRepository {
 
 
     /**
@@ -24,8 +24,6 @@ class JobRepository extends BaseRepository {
     {
         // TODO: Implement model() method.
 
-        return Job::class;
+        return User::class;
     }
-
-
 }

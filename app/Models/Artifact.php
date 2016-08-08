@@ -10,13 +10,13 @@ class Artifact extends Model{
 
     public $timestamps = false;
 
-    protected $table = 'artifact';
+    protected $table = 'job_artifact';
 
     protected $fillabe = [];
 
 
     public function job()
     {
-        return $this->belongsTo('App\Models\Job','artfact_id');
+        return $this->belongsTo('App\Models\Job');
     }
 }

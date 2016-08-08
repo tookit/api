@@ -11,7 +11,7 @@ class Job extends Model{
 
     use SoftDeletes;
 
-    protected $table = 'jobs';
+    protected $table = 'job';
 
     protected $fillable = [
 

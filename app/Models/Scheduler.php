@@ -12,7 +12,7 @@ class Scheduler extends Model{
 
     public $timestamps = false;
 
-    protected $table = 'scheduler';
+    protected $table = 'job_scheduler';
 
     protected $fillabel = [];
 

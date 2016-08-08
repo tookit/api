@@ -13,7 +13,7 @@ class CreateJobScheduler extends Migration
     public function up()
     {
         //
-        Schema::create('scheduler', function (Blueprint $table) {
+        Schema::create('job_scheduler', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('starts_at');
             $table->bigInteger('ends_at');
@@ -32,6 +32,6 @@ class CreateJobScheduler extends Migration
     public function down()
     {
         //
-        Schema::drop('scheduler');
+        Schema::drop('job_scheduler');
     }
 }

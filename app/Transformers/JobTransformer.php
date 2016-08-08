@@ -14,8 +14,27 @@ use League\Fractal\TransformerAbstract;
 
 class JobTransformer extends TransformerAbstract {
 
+
+    /**
+     * List of resources possible to include
+     *
+     * @var array
+     */
+    protected $availableIncludes = [
+        'artifact','scheduler'
+    ];
+
+
+    public function includeArtifact(Job $job)
+    {
+        $artifact = $job->artifact();
+        return $this->item($artifact, new ArtifactTransformer());
+    }
+
     public function transform(Job $job)
     {
+
+
         return [
             'id'           => $job->id,
             'name'        => $job->name,

@@ -7,14 +7,24 @@ use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract{
 
+    /**
+     * List of resources possible to include
+     *
+     * @var array
+     */
+    protected $availableIncludes = [
+        'roles'
+    ];
+
     public function transform(User $user)
     {
         return [
             'id'           => $user->id,
-            'name'        => $user->title,
-            'email'      => $user->content,
-            'created_at'   => $user->created_at->toDateTimeString(),
-            'updated_at'   => $user->updated_at->toDateTimeString(),
+            'name'        => $user->name,
+            'email'      => $user->email,
+            'created_at'   => $user->created_at,
+            'updated_at'   => $user->updated_at,
+            'roles'=>$user->roles()
         ];
     }
 }

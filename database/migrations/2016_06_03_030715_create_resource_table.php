@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobArtifact extends Migration
+class CreateResourceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,10 @@ class CreateJobArtifact extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('job_artifact', function (Blueprint $table) {
+        Schema::create('resource', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('url');
-            $table->string('version');
-            $table->string('manifest');
-            $table->text('shellscript');
+            $table->string('name');
+            $table->string('description');
             $table->softDeletes();
         });
     }
@@ -31,6 +28,6 @@ class CreateJobArtifact extends Migration
     public function down()
     {
         //
-        Schema::drop('job_artifact');
+        Schema::drop('resource');
     }
 }

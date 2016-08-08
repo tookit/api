@@ -8,10 +8,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Repositories\JobRepository;
 use App\Transformers\JobTransformer;
-use App\Models\Job;
 use Illuminate\Support\Facades\Gate;
 
 
@@ -27,7 +25,9 @@ class JobController extends Controller {
      */
     public function __construct(JobRepository $repository)
     {
+//        dd($this->repository->has('artifact'));die();
         $this->repository = $repository;
+        $this->repository->with(['artifact']);
 //        dd(Gate::allows('User.read'));
 
     }

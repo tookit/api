@@ -13,7 +13,6 @@ use League\Fractal\TransformerAbstract;
 
 class Controller extends BaseController
 {
-    //
 
     protected $queryLog;
 
@@ -25,7 +24,7 @@ class Controller extends BaseController
 
     /**
      * @param mixed $item
-     * @param League\Fractal\TransformerAbstract $transformer
+     * @param /League\Fractal\TransformerAbstract $transformer
      * @param int $status
      * @param array $header
      * @return \Symfony\Component\HttpFoundation\Response
@@ -41,7 +40,7 @@ class Controller extends BaseController
 
     /**
      * @param mixed  $collection
-     * @param League\Fractal\TransformerAbstract $transformer
+     * @param \League\Fractal\TransformerAbstract $transformer
      * @param int $status
      * @param array $header
      */
@@ -55,18 +54,19 @@ class Controller extends BaseController
     }
 
     /**
-     * @param League\Fractal\Resource\ResourceAbstract $resource
+     * @param \League\Fractal\Resource\ResourceAbstract $resource
      * @param int $status
-     * @param array $headers
+     * @param array $header
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    protected function buildResourceResponse(ResourceAbstract $resource,$status = 200,array $header = [])
+    protected function buildResourceResponse(ResourceAbstract $resource,$status = 200, $header = [])
     {
         $fractal = new Manager();
         $this->queryLog = new QueryLog();
-        dd($this->queryLog->append($fractal->createData($resource)->toArray()));die();
+        $response = $this->queryLog->append($fractal->createData($resource)->toArray());
         return response()->json(
-            $fractal->createData($resource)->toArray(),
+//            ?$fractal->createData($resource)->toArray(),
+            $response,
             $status,
             $header
         );
