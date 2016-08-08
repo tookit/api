@@ -26,7 +26,7 @@ class JobController extends Controller {
     public function __construct(JobRepository $repository)
     {
         $this->repository = $repository;
-        $this->repository->with(['artifact']);
+//        $this->repository->with(['artifact']);
 
     }
 

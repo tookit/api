@@ -33,14 +33,14 @@ class JobTransformer extends TransformerAbstract {
 
     public function transform(Job $job)
     {
-
-        return [
-            'id'           => $job->id,
-            'name'        => $job->name,
-            'description'      => $job->description,
-            'created_at'   => $job->created_at->toDateTimeString(),
-            'updated_at'   => $job->updated_at->toDateTimeString(),
-//            'artifacts'=> $job->getRelations('artifact')
-        ];
+          return $job->toArray();
+//        return [
+//            'id'           => $job->id,
+//            'name'        => $job->name,
+//            'description'      => $job->description,
+//            'created_at'   => $job->created_at->toDateTimeString(),
+//            'updated_at'   => $job->updated_at->toDateTimeString(),
+////            'artifacts'=> $job->getRelations('artifact')
+//        ];
     }
 }

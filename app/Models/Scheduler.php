@@ -21,7 +21,7 @@ class Scheduler extends Model{
      */
     public function job(){
 
-        return $this->belongsTo('App\Models\Job','scheduler_id');
+        return $this->hasOne('App\Models\Job','scheduler_id');
     }
 
 }
