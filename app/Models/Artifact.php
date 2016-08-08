@@ -17,6 +17,6 @@ class Artifact extends Model{
 
     public function job()
     {
-        return $this->belongsTo('App\Models\Job');
+        return $this->hasOne('App\Models\Job','artifact_id');
     }
 }

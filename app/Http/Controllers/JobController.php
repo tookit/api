@@ -25,10 +25,8 @@ class JobController extends Controller {
      */
     public function __construct(JobRepository $repository)
     {
-//        dd($this->repository->has('artifact'));die();
         $this->repository = $repository;
         $this->repository->with(['artifact']);
-//        dd(Gate::allows('User.read'));
 
     }
 
