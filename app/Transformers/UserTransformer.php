@@ -12,18 +12,18 @@ class UserTransformer extends TransformerAbstract{
      *
      * @var array
      */
-    protected $availableIncludes = [
+    protected $defaultIncludes = [
         'roles'
     ];
 
     public function transform(User $user)
     {
-        return [
-            'id'           => $user->id,
-            'name'        => $user->name,
-            'email'      => $user->email,
-            'created_at'   => $user->created_at,
-            'updated_at'   => $user->updated_at,
-        ];
+        return $user->toArray();
+    }
+
+    public  function includeRoles(User $user)
+    {
+        $roles  = $user->roles()->getResults();
+        return $this->collection($roles, new RoleTransformer());
     }
 }

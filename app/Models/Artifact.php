@@ -19,4 +19,9 @@ class Artifact extends Model{
     {
         return $this->hasOne('App\Models\Job','artifact_id');
     }
+
+    public function getShellscriptAttribute($value)
+    {
+        return base64_decode($value);
+    }
 }

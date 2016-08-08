@@ -27,7 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('League\Fractal\Manager', function($app) {
             $manager = new \League\Fractal\Manager;
-
             // Use the serializer of your choice.
             #$manager->setSerializer(new \App\Http\Serializers\RootSerializer);
 

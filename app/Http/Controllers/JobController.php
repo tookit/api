@@ -26,13 +26,14 @@ class JobController extends Controller {
     public function __construct(JobRepository $repository)
     {
         $this->repository = $repository;
-//        $this->repository->with(['artifact']);
+        $this->repository->with(['artifact']);
 
     }
 
     public function show()
     {
         $collection =  $this->repository->paginate(10);
+//        dd($collection);die();
         return $this->buildCollectionResponse($collection,new JobTransformer());
 
     }

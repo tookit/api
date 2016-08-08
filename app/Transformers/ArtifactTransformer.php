@@ -23,6 +23,7 @@ class ArtifactTransformer extends TransformerAbstract {
         return [
             'version'        => $artifact->verion,
             'url'      => $artifact->url,
+            'schellscript'=>$artifact->shellscript
 
         ];
     }

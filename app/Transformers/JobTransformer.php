@@ -20,27 +20,28 @@ class JobTransformer extends TransformerAbstract {
      *
      * @var array
      */
-    protected $availableIncludes = [
+    protected $defaultIncludes = [
         'artifact','scheduler'
     ];
 
 
-    public function includeArtifact(Job $job)
-    {
-        $artifact = $job->artifact();
-        return $this->item($artifact, new ArtifactTransformer());
-    }
 
     public function transform(Job $job)
     {
           return $job->toArray();
-//        return [
-//            'id'           => $job->id,
-//            'name'        => $job->name,
-//            'description'      => $job->description,
-//            'created_at'   => $job->created_at->toDateTimeString(),
-//            'updated_at'   => $job->updated_at->toDateTimeString(),
-////            'artifacts'=> $job->getRelations('artifact')
-//        ];
+
+    }
+
+
+    public function includeArtifact(Job $job)
+    {
+
+        $artifact = $job->artifact()->getResults();
+        return $this->item($artifact, new ArtifactTransformer());
+    }
+
+    public function includeScheduler(Job $job)
+    {
+        return $this->item($job->scheduler()->getResults(),new SchedulerTransformer());
     }
 }
