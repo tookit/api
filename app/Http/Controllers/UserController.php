@@ -13,17 +13,17 @@ use App\Transformers\JobTransformer;
 use Illuminate\Support\Facades\Gate;
 
 
-class JobController extends Controller {
+class UserController extends Controller {
 
     /**
-     * @var JobRepository
+     * @var UserRepository
      */
     protected $repository;
 
     /**
      * @param JobRepository $repository
      */
-    public function __construct(JobRepository $repository)
+    public function __construct(UserRepository $repository)
     {
         $this->repository = $repository;
 
@@ -32,7 +32,7 @@ class JobController extends Controller {
     public function show()
     {
         $collection =  $this->repository->paginate(10);
-        return $this->buildCollectionResponse($collection,new JobTransformer());
+        return $this->buildCollectionResponse($collection,new UserTransformer());
 
     }
 }

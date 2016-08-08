@@ -13,7 +13,7 @@ class CreateJobArtifact extends Migration
     public function up()
     {
         //
-        Schema::create('artifact', function (Blueprint $table) {
+        Schema::create('job_artifact', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('url');
             $table->string('version');
@@ -31,6 +31,6 @@ class CreateJobArtifact extends Migration
     public function down()
     {
         //
-        Schema::drop('artifact');
+        Schema::drop('job_artifact');
     }
 }

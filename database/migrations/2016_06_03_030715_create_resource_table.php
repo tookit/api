@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResourceTypeTable extends Migration
+class CreateResourceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,11 @@ class CreateResourceTypeTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('resource_type',function(Blueprint $table){
-
+        Schema::create('resource', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name');
             $table->string('description');
             $table->softDeletes();
-
         });
     }
 
@@ -30,6 +28,6 @@ class CreateResourceTypeTable extends Migration
     public function down()
     {
         //
-        Schema::drop('resource_type');
+        Schema::drop('resource');
     }
 }
