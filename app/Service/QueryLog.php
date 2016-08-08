@@ -51,7 +51,7 @@ class QueryLog
     {
         $queries = [];
 
-        foreach(\DB::getQueryLog() as $query)
+        foreach(DB::getQueryLog() as $query)
         {
             $queryString  = array_get($query,'query');
             $bindings = array_get($query,'bindings');

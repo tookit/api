@@ -8,8 +8,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Repositories\UserRepository;
 use App\Transformers\UserTransformer;
+
 use Illuminate\Support\Facades\Gate;
 
 
@@ -21,7 +23,8 @@ class UserController extends Controller {
     protected $repository;
 
     /**
-     * @param UserRepository $repository
+
+     * @param JobRepository $repository
      */
     public function __construct(UserRepository $repository)
     {

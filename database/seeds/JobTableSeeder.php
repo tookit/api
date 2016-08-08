@@ -27,7 +27,7 @@ class JobTableSeeder extends TableSeeder{
                 'name' => $this->faker->text(20),
                 'description'=> $this->faker->realText(100),
                 'agent_key'=>$this->faker->md5,
-                'status'=>'Init'
+                'status'=>$this->faker->randomElements(['Ready','Scheduled'])
 
             ]);
         }
