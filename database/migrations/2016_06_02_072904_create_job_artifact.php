@@ -15,7 +15,7 @@ class CreateJobArtifact extends Migration
         //
         Schema::create('job_artifact', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('url');
+            $table->string('url');
             $table->string('version');
             $table->string('manifest');
             $table->text('shellscript');

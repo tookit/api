@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Service\QueryLog;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use League\Fractal\Manager;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
@@ -16,9 +17,10 @@ class Controller extends BaseController
 
     protected $queryLog;
 
+
+
     public function __construct()
     {
-
 
     }
 
@@ -39,7 +41,7 @@ class Controller extends BaseController
     }
 
     /**
-     * @param mixed  $collection
+     * @param LengthAwarePaginator  $collection
      * @param \League\Fractal\TransformerAbstract $transformer
      * @param int $status
      * @param array $header
@@ -49,6 +51,7 @@ class Controller extends BaseController
     {
 
         $resource = new Collection($collection,$transformer);
+//        dd($collection);
         $resource->setPaginator(new IlluminatePaginatorAdapter($collection));
         return $this->buildResourceResponse($resource, $status, $header);
     }

@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 
 use App\Models\User;
+use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class UserRepository extends BaseRepository {
@@ -26,4 +27,10 @@ class UserRepository extends BaseRepository {
 
         return User::class;
     }
+
+    public function boot(){
+        $requestCriteria = $this->app->make(RequestCriteria::class);
+        $this->pushCriteria($requestCriteria);
+    }
+
 }

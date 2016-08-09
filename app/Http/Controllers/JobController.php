@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\Repositories\JobRepository;
 use App\Transformers\JobTransformer;
 use Illuminate\Support\Facades\Gate;
+use App\Repositories\Critera\MyCritera;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 
 class JobController extends Controller {
@@ -26,14 +28,14 @@ class JobController extends Controller {
     public function __construct(JobRepository $repository)
     {
         $this->repository = $repository;
-        $this->repository->with(['artifact']);
+        $requestCriteria =app(RequestCriteria::class);
+        $this->repository->pushCriteria($requestCriteria);
 
     }
 
     public function show()
     {
         $collection =  $this->repository->paginate(10);
-//        dd($collection);die();
         return $this->buildCollectionResponse($collection,new JobTransformer());
 
     }

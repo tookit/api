@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 
 use App\Models\Job;
+
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class JobRepository extends BaseRepository {
@@ -26,6 +27,17 @@ class JobRepository extends BaseRepository {
 
         return Job::class;
     }
+
+    protected $fieldSearchable = [
+
+        'name'=>'like',
+
+    ];
+
+    public function boot(){
+
+    }
+
 
 //    public function presenter()
 //    {

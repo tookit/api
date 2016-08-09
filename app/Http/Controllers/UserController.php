@@ -34,7 +34,7 @@ class UserController extends Controller {
 
     public function show()
     {
-        $collection =  $this->repository->with('roles')->paginate(10);
+        $collection =  $this->repository->with(['roles'])->paginate();
         return $this->buildCollectionResponse($collection,new UserTransformer());
 
     }

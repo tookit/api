@@ -50,7 +50,10 @@ $factory->define(App\Models\Artifact::class,function($faker){
 
 
     return [
-        'url'=>  'http://local.api.cronman.esg.zone/api/job/'+ $faker->randomDigit(),
+        'url'=>  function($faker){
+           return 'http://local.api.cronman.esg.zone/api/job/'+ $faker->randomDigit();
+        },
+        'version'=>$faker->randomDigit(),
         'manifest'=> '',
         'shellscript'=> base64_encode('
            echo "Hello World"

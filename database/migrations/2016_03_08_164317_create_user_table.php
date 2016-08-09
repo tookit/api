@@ -18,6 +18,7 @@ class CreateUserTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->json('profile');
+            $table->enum('active',['Yes','No'])->default('No');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

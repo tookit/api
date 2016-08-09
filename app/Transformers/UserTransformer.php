@@ -12,9 +12,9 @@ class UserTransformer extends TransformerAbstract{
      *
      * @var array
      */
-    protected $defaultIncludes = [
-        'roles'
-    ];
+//    protected $defaultIncludes = [
+//        'roles'
+//    ];
 
     public function transform(User $user)
     {
