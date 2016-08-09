@@ -11,7 +11,6 @@ namespace App\Http\Controllers;
 use App\Repositories\JobRepository;
 use App\Transformers\JobTransformer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 class JobController extends Controller {
@@ -20,6 +19,7 @@ class JobController extends Controller {
      * @var JobRepository
      */
     protected $repository;
+
 
     /**
      * @param JobRepository $repository
@@ -48,7 +48,10 @@ class JobController extends Controller {
 
     public function store(Request $request)
     {
-        $this->repository->create($request->input());
+        $this->validate($request, [
+            'name' => 'required|max:10',
+
+        ]);
     }
 
     public function destroy(){

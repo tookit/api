@@ -17,7 +17,7 @@ class Controller extends BaseController
 
     protected $queryLog;
 
-
+    protected $request;
 
     public function __construct()
     {
@@ -51,7 +51,6 @@ class Controller extends BaseController
     {
 
         $resource = new Collection($collection,$transformer);
-//        dd($collection);
         $resource->setPaginator(new IlluminatePaginatorAdapter($collection));
         return $this->buildResourceResponse($resource, $status, $header);
     }

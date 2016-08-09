@@ -11,6 +11,7 @@ namespace App\Repositories;
 
 use App\Models\Job;
 
+use App\Repositories\Validators\JobValidator;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class JobRepository extends BaseRepository {
