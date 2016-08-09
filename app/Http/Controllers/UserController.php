@@ -11,9 +11,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\UserRepository;
 use App\Transformers\UserTransformer;
-
-use Illuminate\Support\Facades\Gate;
-
+use Prettus\Repository\Criteria\RequestCriteria;
 
 class UserController extends Controller {
 
@@ -29,12 +27,14 @@ class UserController extends Controller {
     public function __construct(UserRepository $repository)
     {
         $this->repository = $repository;
+        $requestCriteria =app(RequestCriteria::class);
+        $this->repository->pushCriteria($requestCriteria);
 
     }
 
     public function show()
     {
-        $collection =  $this->repository->with(['roles'])->paginate();
+        $collection =  $this->repository->paginate();
         return $this->buildCollectionResponse($collection,new UserTransformer());
 
     }
