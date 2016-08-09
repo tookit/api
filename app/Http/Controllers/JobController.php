@@ -10,10 +10,9 @@ namespace App\Http\Controllers;
 
 use App\Repositories\JobRepository;
 use App\Transformers\JobTransformer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use App\Repositories\Critera\MyCritera;
 use Prettus\Repository\Criteria\RequestCriteria;
-
 
 class JobController extends Controller {
 
@@ -37,6 +36,22 @@ class JobController extends Controller {
     {
         $collection =  $this->repository->paginate(10);
         return $this->buildCollectionResponse($collection,new JobTransformer());
+
+    }
+
+
+    public function view($id)
+    {
+        $item = $this->repository->find($id);
+        return $this->buildItemResponse($item,new JobTransformer());
+    }
+
+    public function store(Request $request)
+    {
+        $this->repository->create($request->input());
+    }
+
+    public function destroy(){
 
     }
 }

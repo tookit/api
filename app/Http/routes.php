@@ -33,6 +33,16 @@ $app->group(['middleware' => 'jwt.auth'], function($app) {
 
     $app->get('/users','App\Http\Controllers\UserController@show');
 
+    $app->get('/groups','App\Http\Controllers\RoleController@show');
+
+    $app->get('/agents','App\Http\Controllers\AgentController@show');
+
     $app->get('/jobs','App\Http\Controllers\JobController@show');
+    $app->get('/jobs/{id:\d+}','App\Http\Controllers\JobController@view');
+
+    $app->post('/jobs','App\Http\Controllers\JobController@store');
+
+
+    $app->get('/resources','App\Http\Controllers\ResourceController@show');
 
 });

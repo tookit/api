@@ -20,7 +20,7 @@ class JobTransformer extends TransformerAbstract {
      *
      * @var array
      */
-    protected $defaultIncludes = [
+    protected $availableIncludes = [
         'artifact','scheduler'
     ];
 
