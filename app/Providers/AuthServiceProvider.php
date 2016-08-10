@@ -28,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //define lumen gates here
         Gate::define('User.Read', function ($user) {
+//            var_dump($user->roles[0]->name);die();
             return $user->id ===  1;
         });
 

@@ -13,6 +13,18 @@ class CreatePermissionTable extends Migration
     public function up()
     {
         //
+        Schema::create('permission',function (Blueprint $table){
+            $table->increments('id');
+            $table->string('name')->unique();
+            $table->string('method');
+            $table->string('path');
+            $table->string('controller');
+            $table->string('action');
+            $table->text('description');
+            $table->softDeletes();
+            $table->timestamps();
+
+        });
     }
 
     /**
@@ -23,5 +35,6 @@ class CreatePermissionTable extends Migration
     public function down()
     {
         //
+        Schema::drop('permission');
     }
 }
