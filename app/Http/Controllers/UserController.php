@@ -11,7 +11,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\UserRepository;
 use App\Transformers\UserTransformer;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -31,19 +31,26 @@ class UserController extends Controller {
     {
         $this->repository = $repository;
 
+
     }
 
     public function show()
     {
-        $collection =  $this->repository->with(['roles'])->paginate();
-        return $this->buildCollectionResponse($collection,new UserTransformer());
+        if(Gate::denies('User.Read',$user)){
+            $collection =  $this->repository->paginate();
+            return $this->buildCollectionResponse($collection,new UserTransformer());
+        }
+
 
     }
 
 
     public function view($id)
     {
-        $item = $this->repository->find('id',$id);
+        if(!Gate::allows('User.Read')){
+            abort(403);
+        }
+        $item = $this->repository->find($id);
         return $this->buildItemResponse($item, New UserTransformer());
     }
 
