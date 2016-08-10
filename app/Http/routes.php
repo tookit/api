@@ -35,6 +35,10 @@ $app->group(['middleware' => 'jwt.auth'], function($app) {
     $app->get('/users/{id:\d+}',['as'=>'User.Read','uses'=>'App\Http\Controllers\UserController@view']);
     $app->post('/users',['as'=>'User.Create','uses'=>'App\Http\Controllers\UserController@store']);
 
+    $app->get('/roles', ['as'=>'Role.Read', 'uses'=>'App\Http\Controllers\RoleController@show']);
+    $app->get('/roles/{id:\d+}',['as'=>'Role.Read','uses'=>'App\Http\Controllers\RoleController@view']);
+    $app->post('/roles',['as'=>'Role.Create','uses'=>'App\Http\Controllers\RoleController@store']);
+
     $app->get('/groups',['as'=>'Group.Read','uses'=>'App\Http\Controllers\RoleController@show']);
 
     $app->get('/agents',['as'=>'Agents.Read','uses'=>'App\Http\Controllers\AgentController@show']);

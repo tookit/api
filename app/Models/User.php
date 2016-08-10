@@ -37,6 +37,10 @@ class User extends Model implements
         'password',
     ];
 
+
+    protected $appends = [
+      'group_membership'
+    ];
     protected $dates = ['deleted_at'];
 
 
@@ -45,6 +49,11 @@ class User extends Model implements
 
         return $this->belongsToMany('App\Models\Role','role_user','user_id','role_id');
 
+    }
+
+    public function getGroupMembershipAttribute()
+    {
+        return $this->roles->lists('name');
     }
 
 }

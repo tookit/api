@@ -18,26 +18,13 @@ class UserTransformer extends TransformerAbstract{
 
     public function transform(User $user)
     {
-        return [
-          'name'    => $user->name,
-          'email'    => $user->email,
-          'profile'    => $user->profile,
-          'roles'    => $this->transformRoles($user->roles)
-        ];
+        return $user->toArray();
     }
 
-    protected function transformRoles($roles)
+
+    public  function includeRoles(User $user)
     {
-        $ret = [];
-        foreach($roles as $role)
-        {
-            $ret[] = $role->name;
-        }
-        return $ret;
+        $roles  = $user->roles()->getResults();
+        return $this->collection($roles, new RoleTransformer());
     }
-//    public  function includeRoles(User $user)
-//    {
-//        $roles  = $user->roles()->getResults();
-//        return $this->collection($roles, new RoleTransformer());
-//    }
 }
