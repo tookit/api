@@ -13,10 +13,10 @@ class Role extends Model{
 
     protected $table = 'role';
 
-//    protected $fillable = [
-//
-//        'agent_key','name','description'
-//    ];
+    protected $fillable = [
+
+        'name','description'
+    ];
 
 
     public function users(){
@@ -24,5 +24,10 @@ class Role extends Model{
         return $this->belongsToMany('App\Models\User','role_user','role_id','user_id');
     }
 
+
+    public function permissions()
+    {
+        return $this->belongsToMany('App\Models\Permission','role_permission','role_id','user_id');
+    }
 
 }
