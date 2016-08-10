@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Repositories\UserRepository;
 use App\Transformers\UserTransformer;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 
@@ -36,6 +37,30 @@ class UserController extends Controller {
     {
         $collection =  $this->repository->with(['roles'])->paginate();
         return $this->buildCollectionResponse($collection,new UserTransformer());
+
+    }
+
+
+    public function view($id)
+    {
+        $item = $this->repository->find('id',$id);
+        return $this->buildItemResponse($item, New UserTransformer());
+    }
+
+    public function store(Request $request)
+    {
+
+        $this->validate($request,[
+
+            'name'=>'required|unique:user|max:60',
+            'description'=>'max:255'
+        ]);
+
+    }
+
+
+    public function destroy()
+    {
 
     }
 }
