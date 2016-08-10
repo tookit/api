@@ -12,6 +12,10 @@ namespace App\Http\Controllers;
 use App\Repositories\UserRepository;
 use App\Transformers\UserTransformer;
 use Prettus\Repository\Criteria\RequestCriteria;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class UserController extends Controller {
 
@@ -30,12 +34,44 @@ class UserController extends Controller {
         $requestCriteria =app(RequestCriteria::class);
         $this->repository->pushCriteria($requestCriteria);
 
+
     }
 
     public function show()
     {
-        $collection =  $this->repository->paginate();
-        return $this->buildCollectionResponse($collection,new UserTransformer());
+
+        if(Gate::denies('User.Read',$user)){
+            $collection =  $this->repository->paginate();
+            return $this->buildCollectionResponse($collection,new UserTransformer());
+        }
+
+
+    }
+
+
+    public function view($id)
+    {
+        if(!Gate::allows('User.Read')){
+            abort(403);
+        }
+        $item = $this->repository->find($id);
+        return $this->buildItemResponse($item, New UserTransformer());
+    }
+
+    public function store(Request $request)
+    {
+
+        $this->validate($request,[
+
+            'name'=>'required|unique:user|max:60',
+            'description'=>'max:255'
+        ]);
+
+    }
+
+
+    public function destroy()
+    {
 
     }
 }

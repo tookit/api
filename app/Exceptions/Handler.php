@@ -45,6 +45,41 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($request->wantsJson()) {
+            $response = [
+                'message' => (string) $e->getMessage(),
+                'status' => 404
+            ];
+
+            if ($e instanceof HttpException) {
+                $response['message'] = "The Request is not found";
+                $response['status'] = $e->getStatusCode();
+            } else if ($e instanceof ModelNotFoundException) {
+                $response['message'] = $e->getMessage();
+                $response['status'] = 400;
+            }
+
+            if ($this->isDebugMode()) {
+                $response['debug'] = [
+                    'exception' => get_class($e),
+                    'trace' => $e->getTrace()
+                ];
+            }
+
+            return response()->json(['error' => $response], $response['status']);
+        }
+
         return parent::render($request, $e);
     }
+
+    /**
+     * Determine if the application is in debug mode.
+     *
+     * @return Boolean
+     */
+    public function isDebugMode()
+    {
+        return (boolean) env('APP_DEBUG');
+    }
+
 }

@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
+use App\Models\Artifact;
 use App\Repositories\JobRepository;
 use App\Transformers\JobTransformer;
 use Illuminate\Http\Request;
@@ -46,15 +48,36 @@ class JobController extends Controller {
         return $this->buildItemResponse($item,new JobTransformer());
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:10',
+            'name' => 'required|max:255|unique:job',
+            'description' => 'max:255',
+            'agent_key'=>'required|max:60',
+            'scheduler.starts_at'=>'date',
+            'scheduler.ends_at'=>'date|afeter:scheduler.ends_at',
+            'artifact.shellscript'=>'required',
+            'artifact.version'=>'digits'
 
         ]);
+        $item = Job::create($request->input());
+        $artifact = Artifact::create($request->input('artifact'));
+        $item->artifact()->associate($artifact);
+        $item->save();
+        return  response()->json([
+            'message'=>'Job created.',
+            'data' => $item->toArray()
+        ]);
+
     }
 
-    public function destroy(){
+    public function destroy($id){
+
+
 
     }
 }
