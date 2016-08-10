@@ -12,8 +12,7 @@ class Artifact extends Model{
 
     protected $table = 'job_artifact';
 
-    protected $fillabe = [];
-
+    protected $fillable = ['version','shellscript'];
 
     public function job()
     {

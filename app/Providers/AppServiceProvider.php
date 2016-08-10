@@ -20,10 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerFractalBinding();
     }
 
-    public function registerFractal()
+    public function registerFractalBinding()
     {
         $this->app->bind('League\Fractal\Manager', function($app) {
             $manager = new \League\Fractal\Manager;
