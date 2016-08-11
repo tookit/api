@@ -47,7 +47,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($request->wantsJson()) {
+
+
+//        if ($request->wantsJson()) {
             $response = [
                 'message' => (string) $e->getMessage(),
                 'status' => 404
@@ -65,7 +67,11 @@ class Handler extends ExceptionHandler
             }else if($e instanceof MethodNotAllowedHttpException){
                 $response['message'] = empty($e->getMessage()) ? 'Method not allowed' : $e->getMessage();
                 $response['status'] = 405;
+            }else if($e instanceof HttpException){
+                $response['message'] = $e->getMessage();
+                $response['status'] = $e->getStatusCode();
             }
+
             if ($this->isDebugMode()) {
                 $response['debug'] = [
                     'exception' => get_class($e),
@@ -74,7 +80,7 @@ class Handler extends ExceptionHandler
             }
 
             return response()->json(['error' => $response], $response['status']);
-        }
+//        }
 
         return parent::render($request, $e);
     }

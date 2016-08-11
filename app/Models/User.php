@@ -51,9 +51,23 @@ class User extends Model implements
 
     }
 
+    /**
+     * @return Collection
+     */
     public function getGroupMembershipAttribute()
     {
         return $this->roles->lists('name');
+    }
+
+
+    public function hasRole(array $roles)
+    {
+        $collection = collect($roles);
+
+        $intersect = $collection->intersect($this->getGroupMembershipAttribute());
+
+        return ($intersect->isEmpty()) ? false : true;
+
     }
 
 }

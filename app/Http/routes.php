@@ -13,7 +13,7 @@
 
 $app->post('/auth/login', 'Auth\AuthController@postLogin');
 
-$app->group(['middleware' => 'jwt.auth'], function($app) {
+$app->group(['middleware' => 'jwt.auth|role:Support'], function($app) {
     $app->get('/', function () use ($app) {
         return [
             'success' => [

@@ -86,14 +86,16 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+ $app->middleware([
+//    App\Http\Middleware\RoleMiddleware::class
+ ]);
 
 $app->routeMiddleware([
+
     'auth'        => App\Http\Middleware\Authenticate::class,
     'jwt.auth'    => Tymon\JWTAuth\Middleware\GetUserFromToken::class,
     'jwt.refresh' => Tymon\JWTAuth\Middleware\RefreshToken::class,
+    'role'        => \App\Http\Middleware\RoleMiddleware::class,
 ]);
 
 /*
