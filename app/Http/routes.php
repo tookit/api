@@ -10,10 +10,9 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
 $app->post('/auth/login', 'Auth\AuthController@postLogin');
 
-$app->group(['middleware' => 'jwt.auth|role:Support'], function($app) {
+$app->group(['middleware' => 'jwt.auth|role:Admin'], function($app) {
     $app->get('/', function () use ($app) {
         return [
             'success' => [

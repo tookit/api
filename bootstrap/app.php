@@ -96,6 +96,7 @@ $app->routeMiddleware([
     'jwt.auth'    => Tymon\JWTAuth\Middleware\GetUserFromToken::class,
     'jwt.refresh' => Tymon\JWTAuth\Middleware\RefreshToken::class,
     'role'        => \App\Http\Middleware\RoleMiddleware::class,
+    'permission'  => \App\Http\Middleware\PermissionMiddleware::class,
 ]);
 
 /*

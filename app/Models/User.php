@@ -60,6 +60,11 @@ class User extends Model implements
     }
 
 
+    public function getRolePermissonsAttribute()
+    {
+
+    }
+
     public function hasRole(array $roles)
     {
         $collection = collect($roles);
@@ -68,6 +73,18 @@ class User extends Model implements
 
         return ($intersect->isEmpty()) ? false : true;
 
+    }
+
+    public function hasPermission($permission)
+    {
+        foreach($this->roles as $role)
+        {
+            if($role->getGroupPermissionAttribute()->contains($permission))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
