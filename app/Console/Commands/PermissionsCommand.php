@@ -47,7 +47,9 @@ class  PermissionsCommand extends Command{
                     'controller' => $this->getController($route['action']),
                     'action' => $this->getAction($route['action']),
                 ];
-                Permission::updateOrCreate($rows);
+                $permission = Permission::updateOrCreate($rows);
+                //update admin role permissions
+                $permission->roles()->attach(1);
             }
 
         }
