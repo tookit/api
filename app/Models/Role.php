@@ -13,16 +13,29 @@ class Role extends Model{
 
     protected $table = 'role';
 
-//    protected $fillable = [
-//
-//        'agent_key','name','description'
-//    ];
+    protected $fillable = [
 
+        'name','description'
+    ];
+
+    protected $appends = [
+        'group_permission'
+    ];
 
     public function users(){
 
         return $this->belongsToMany('App\Models\User','role_user','role_id','user_id');
     }
 
+
+    public function permissions()
+    {
+        return $this->belongsToMany('App\Models\Permission','role_permission','role_id','permission_id');
+    }
+
+    public function getGroupPermissionAttribute()
+    {
+        return $this->permissions->lists('name');
+    }
 
 }

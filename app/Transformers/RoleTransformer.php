@@ -18,12 +18,6 @@ class RoleTransformer extends TransformerAbstract {
 
     public function transform(Role $role)
     {
-
-
-        return [
-            'name'        => $role->name,
-            'url'      => $role->description,
-
-        ];
+        return $role->toArray();
     }
 }

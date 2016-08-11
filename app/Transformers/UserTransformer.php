@@ -21,6 +21,7 @@ class UserTransformer extends TransformerAbstract{
         return $user->toArray();
     }
 
+
     public  function includeRoles(User $user)
     {
         $roles  = $user->roles()->getResults();
