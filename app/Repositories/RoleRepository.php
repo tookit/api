@@ -12,7 +12,8 @@ namespace App\Repositories;
 use App\Models\Role;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class RoleRepository extends BaseRepository {
+class RoleRepository extends BaseRepository
+{
 
 
     /**
@@ -26,7 +27,6 @@ class RoleRepository extends BaseRepository {
 
         return Role::class;
     }
-
 
 
 }
