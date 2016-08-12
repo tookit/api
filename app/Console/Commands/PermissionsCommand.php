@@ -53,7 +53,7 @@ class  PermissionsCommand extends Command{
             }
 
         }
-        echo "Permission updated";
+        $this->info("Admin's permission updated");
 
     }
     /**
