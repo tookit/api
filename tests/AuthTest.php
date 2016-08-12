@@ -26,6 +26,7 @@ class AuthTest extends TestCase{
 
         $this->post('auth/login',['email'=>'wangqiangshen@gmail.com','password'=>'`7493064']);
         $this->assertEquals($this->response->getStatusCode(),200);
+        dd(Cache::get('token'));
         $this->token = json_decode($this->response->getContent())->success->token;
 
     }

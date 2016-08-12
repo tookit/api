@@ -12,7 +12,7 @@
 */
 $app->post('/auth/login', 'Auth\AuthController@postLogin');
 
-$app->group(['middleware' => 'jwt.auth|role:Admin'], function($app) {
+$app->group(['middleware' => 'auth:api|role:Admin'], function($app) {
     $app->get('/', function () use ($app) {
         return [
             'success' => [

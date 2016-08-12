@@ -36,7 +36,6 @@ class AuthController extends Controller
         }
 
         $credentials = $this->getCredentials($request);
-
         try {
             // Attempt to verify the credentials and create a token for the user
             if (!$token = JWTAuth::attempt($credentials)) {
@@ -57,7 +56,7 @@ class AuthController extends Controller
 
         // All good so return the token
         return response()->json([
-            'success' => [
+            'data' => [
                 'message' => 'token_generated',
                 'token' => $token,
             ]

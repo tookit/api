@@ -26,10 +26,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        //define lumen gates here
-        Gate::define('User.Read', function ($user) {
-//            var_dump($user->roles[0]->name);die();
-            return $user->id ===  1;
+        $this->app['auth']->viaRequest('api', function ($request)
+        {
+            return \App\Models\User::where('email', $request->input('email'))->first();
         });
 
 //        Gate::define('User.Create',function($user){
