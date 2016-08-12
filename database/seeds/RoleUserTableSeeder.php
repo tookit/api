@@ -13,7 +13,7 @@ class RoleUserTableSeeder extends Seeder
     public function run()
     {
 
-        // create admin account
+        // create user role relations
         DB::table('role_user')->insert([
             'user_id' => 1,
             'role_id' => 1

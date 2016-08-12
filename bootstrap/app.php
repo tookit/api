@@ -30,8 +30,8 @@ $app->configure('auth');
 $app->configure('repository');
 
 //facades
-class_alias(Tymon\JWTAuth\Facades\JWTAuth::class, 'JWTAuth');
-class_alias(Tymon\JWTAuth\Facades\JWTFactory::class, 'JWTFactory');
+//class_alias(Tymon\JWTAuth\Facades\JWTAuth::class, 'JWTAuth');
+//class_alias(Tymon\JWTAuth\Facades\JWTFactory::class, 'JWTFactory');
 
 $app->withEloquent();
 

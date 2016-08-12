@@ -12,7 +12,8 @@
         "illuminate/hashing": "^5.2",
         "tymon/jwt-auth": "^0.5.9",
         "league/fractal": "^0.13.0",
-        "prettus/l5-repository": "^2.6"
+        "prettus/l5-repository": "^2.6",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
