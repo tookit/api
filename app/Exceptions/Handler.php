@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
             } else if ($e instanceof ModelNotFoundException) {
 
                 $response['message'] = $e->getMessage();
-                $response['status'] = 400;
+                $response['status'] = 404;
 
             }else if($e instanceof MethodNotAllowedHttpException){
                 $response['message'] = empty($e->getMessage()) ? 'Method not allowed' : $e->getMessage();
@@ -70,6 +70,10 @@ class Handler extends ExceptionHandler
             }else if($e instanceof HttpException){
                 $response['message'] = $e->getMessage();
                 $response['status'] = $e->getStatusCode();
+            }else if($e instanceof ValidationException)
+            {
+                $response['message'] = $e->getMessage();
+                $response['status'] =  400;
             }
 
             if ($this->isDebugMode()) {
@@ -82,7 +86,7 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => $response], $response['status']);
 //        }
 
-        return parent::render($request, $e);
+//        return parent::render($request, $e);
     }
 
     /**
