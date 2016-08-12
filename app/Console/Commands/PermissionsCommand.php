@@ -40,16 +40,18 @@ class  PermissionsCommand extends Command{
             $name = $this->getNamedRoute($route['action']);
             if($name){
                 $rows = [
-                    'id'=>$id,
                     'method' => $route['method'],
                     'path' => $route['uri'],
                     'name' => $name,
                     'controller' => $this->getController($route['action']),
                     'action' => $this->getAction($route['action']),
                 ];
-                $permission = Permission::updateOrCreate($rows);
-                //update admin role permissions
-                $permission->roles()->attach(1);
+                $permission = Permission::firstOrCreate($rows);
+                if($permission->roles->isEmpty() && $permission->roles->contains('Admin'))
+                {
+                    $permission->roles()->attach(1);
+                }
+
             }
 
         }

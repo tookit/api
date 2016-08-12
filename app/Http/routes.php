@@ -46,7 +46,7 @@ $app->group(['middleware' => 'jwt.auth|role:Admin'], function($app) {
 
     $app->get('/jobs/{id:\d+}',['as'=>'Job.Read','uses'=>'App\Http\Controllers\JobController@view']);
 
-    $app->post('/jobs',['as'=>'User.Create','uses'=>'App\Http\Controllers\JobController@store']);
+    $app->post('/jobs',['as'=>'Job.Create','uses'=>'App\Http\Controllers\JobController@store']);
 
     $app->get('/resources',['as'=>'Resource.Read','uses'=>'App\Http\Controllers\ResourceController@show']);
 
