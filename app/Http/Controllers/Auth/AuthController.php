@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Http\Response as IlluminateResponse;
 use Illuminate\Http\Exception\HttpResponseException;
-
 class AuthController extends Controller
 {
     /**
@@ -72,6 +71,6 @@ class AuthController extends Controller
      */
     protected function getCredentials(Request $request)
     {
-        return $request->only('email', 'password');
+        return $request->only('password', 'email');
     }
 }

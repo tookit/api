@@ -25,7 +25,7 @@ $app->group(['middleware' => 'auth:api|role:Admin'], function($app) {
 
         return [
             'success' => [
-                'user' => JWTAuth::parseToken()->authenticate(),
+                'user' => \Tymon\JWTAuth\Facades\JWTAuth::parseToken()->authenticate(),
             ],
         ];
     });

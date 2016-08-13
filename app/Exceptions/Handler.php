@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
     {
 
 
-//        if ($request->wantsJson()) {
+        if ($request->wantsJson()) {
             $response = [
                 'message' => (string) $e->getMessage(),
                 'status' => 404
@@ -84,9 +84,9 @@ class Handler extends ExceptionHandler
             }
 
             return response()->json(['error' => $response], $response['status']);
-//        }
+        }
 
-//        return parent::render($request, $e);
+        return parent::render($request, $e);
     }
 
     /**

@@ -41,7 +41,7 @@ return [
             'driver' => 'api',
             'provider' => 'users',
             'identifier' => 'email',
-            'password' => 'password',
+            'password' => 'email',
         ],
     ],
 
