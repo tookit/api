@@ -12,7 +12,7 @@
 */
 $app->post('/auth/login', 'Auth\AuthController@postLogin');
 
-$app->group(['middleware' => 'auth:api|role:Admin'], function($app) {
+$app->group(['middleware' => 'jwt.auth|role:Admin'], function($app) {
     $app->get('/', function () use ($app) {
         return [
             'success' => [
@@ -21,14 +21,9 @@ $app->group(['middleware' => 'auth:api|role:Admin'], function($app) {
         ];
     });
 
-    $app->get('/me', function () use ($app) {
 
-        return [
-            'success' => [
-                'user' => \Tymon\JWTAuth\Facades\JWTAuth::parseToken()->authenticate(),
-            ],
-        ];
-    });
+
+    $app->get('/me', ['as'=>'User.Profile', 'uses'=>'App\Http\Controllers\MeController@index']);
 
     $app->get('/users', ['as'=>'User.Read', 'uses'=>'App\Http\Controllers\UserController@show']);
     $app->get('/users/{id:\d+}',['as'=>'User.Read','uses'=>'App\Http\Controllers\UserController@view']);

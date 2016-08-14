@@ -47,13 +47,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-
-
         if ($request->wantsJson()) {
-            $response = [
-                'message' => (string) $e->getMessage(),
-                'status' => 404
-            ];
 
             if ($e instanceof NotFoundHttpException) {
                 $response['message'] = "The Request is not found";
@@ -70,10 +64,6 @@ class Handler extends ExceptionHandler
             }else if($e instanceof HttpException){
                 $response['message'] = $e->getMessage();
                 $response['status'] = $e->getStatusCode();
-            }else if($e instanceof ValidationException)
-            {
-                $response['message'] = $e->getMessage();
-                $response['status'] =  400;
             }
 
             if ($this->isDebugMode()) {

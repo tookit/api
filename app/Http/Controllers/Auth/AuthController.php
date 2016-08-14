@@ -19,20 +19,10 @@ class AuthController extends Controller
      */
     public function postLogin(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'email' => 'required|email|max:255',
-                'password' => 'required',
-            ]);
-        } catch (HttpResponseException $e) {
-
-            return response()->json([
-                'error' => [
-                    'message' => 'invalid_auth',
-                    'status_code' => IlluminateResponse::HTTP_BAD_REQUEST,
-                ],
-            ], IlluminateResponse::HTTP_BAD_REQUEST);
-        }
+        $this->validate($request, [
+            'email' => 'required|email|max:255',
+            'password' => 'required',
+        ]);
 
         $credentials = $this->getCredentials($request);
         try {
@@ -55,10 +45,7 @@ class AuthController extends Controller
 
         // All good so return the token
         return response()->json([
-            'data' => [
-                'message' => 'token_generated',
                 'token' => $token,
-            ]
         ]);
     }
 
