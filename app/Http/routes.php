@@ -10,7 +10,12 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-$app->post('/auth/login', 'Auth\AuthController@postLogin');
+
+//$app->group(['middleware'=>'CORS'], function($app) {
+//    $app->post('/auth/login',['as'=>'User.Login', 'App\Http\Controllers\Auth\AuthController@postLogin']);
+//});
+
+$app -> post('/auth/login', ['middleware' => 'CORS', 'uses'=> 'Auth\AuthController@postLogin']);
 
 $app->group(['middleware' => 'jwt.auth|role:Admin'], function($app) {
     $app->get('/', function () use ($app) {

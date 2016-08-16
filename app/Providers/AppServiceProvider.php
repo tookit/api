@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,16 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerFractalBinding();
+        /** @var \Illuminate\Http\Request $request */
+        $request = $this->app->make('request');
+        if($request->isMethod('OPTIONS')) {
+            $this->app->options($request->path(), function(Response $response){
+                $response->header('Access-Control-Allow-Origin', '*');
+                $response->header('Access-Control-Allow-Headers', 'content-type');
+                $response->header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, OPTIONS');
+                return $response;
+            });
+        }
     }
 
     public function registerFractalBinding()
@@ -33,5 +44,7 @@ class AppServiceProvider extends ServiceProvider
             return $manager;
         });
     }
+
+
 
 }
