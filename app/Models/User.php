@@ -25,7 +25,7 @@ class User extends Model implements
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name', 'email','active','password'
     ];
 
     /**
@@ -43,6 +43,10 @@ class User extends Model implements
     ];
     protected $dates = ['deleted_at'];
 
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = app('hash')->make($value);
+    }
 
     public function roles()
     {

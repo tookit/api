@@ -17,7 +17,7 @@
 
 $app -> post('/auth/login', ['middleware' => 'CORS', 'uses'=> 'Auth\AuthController@postLogin']);
 
-$app->group(['middleware' => 'jwt.auth|role:Admin'], function($app) {
+$app->group(['middleware' => 'CORS'], function($app) {
     $app->get('/', function () use ($app) {
         return [
             'success' => [
@@ -31,7 +31,8 @@ $app->group(['middleware' => 'jwt.auth|role:Admin'], function($app) {
     $app->get('/me', ['as'=>'User.Profile', 'uses'=>'App\Http\Controllers\MeController@index']);
 
     $app->get('/users', ['as'=>'User.Read', 'uses'=>'App\Http\Controllers\UserController@show']);
-    $app->get('/users/{id:\d+}',['as'=>'User.Read','uses'=>'App\Http\Controllers\UserController@view']);
+    $app->get('/users/{id:\d+}',['as'=>'User.Update','uses'=>'App\Http\Controllers\UserController@view']);
+    $app->put('/users/{id:\d+}',['as'=>'User.Update','uses'=>'App\Http\Controllers\UserController@update']);
     $app->post('/users',['as'=>'User.Create','uses'=>'App\Http\Controllers\UserController@store']);
 
     $app->get('/roles', ['as'=>'Role.Read', 'uses'=>'App\Http\Controllers\RoleController@show']);

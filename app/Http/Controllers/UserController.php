@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Role;
 use App\Repositories\UserRepository;
 use App\Transformers\UserTransformer;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -40,35 +41,62 @@ class UserController extends Controller {
     public function show()
     {
 
-        if(Gate::allows('User.Read')){
-            $collection =  $this->repository->paginate();
-            return $this->buildCollectionResponse($collection,new UserTransformer());
-        }
-
+        $collection =  $this->repository->paginate();
+        return $this->buildCollectionResponse($collection,new UserTransformer());
 
     }
 
 
     public function view($id)
     {
-        if(!Gate::allows('User.Read')){
-            abort(403);
-        }
         $item = $this->repository->find($id);
         return $this->buildItemResponse($item, New UserTransformer());
     }
 
+
+
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:255|unique:user',
+            'description' => 'max:255',
+            'email'=>'required|max:255|unique:user',
+//            'roles'=>'digits:1',
 
-        $this->validate($request,[
-
-            'name'=>'required|unique:user|max:60',
-            'description'=>'max:255'
+        ]);
+        $item = User::create($request->input());
+        $item->save();
+        $rolesId = $request->input('roles');
+        if($rolesId){
+            $item->roles()->attach($rolesId);
+        }
+        return  response()->json([
+            'message'=>'User created.',
+            'data' => $item->toArray()
         ]);
 
     }
 
+
+    public function update(Request $request,$id){
+        $this->validate($request, [
+            'name' => 'required|max:255|unique:user',
+            'description' => 'max:255',
+            'email'=>'required|max:255|unique:user,email,'.$id,
+//            'roles'=>'digits:1',
+
+        ]);
+
+        $item = User::find($id);
+        $item->name = $request->input('name');
+        $item->email = $request->input('email');
+        $item->save();
+        $rolesId = $request->input('roles');
+        if($rolesId){
+            $item->roles()->sync($rolesId);
+        }
+        return response()->json(['message'=>'updated']);
+    }
 
     public function destroy()
     {
