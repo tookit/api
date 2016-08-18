@@ -18,13 +18,13 @@
 $app -> post('/auth/login', ['middleware' => 'CORS', 'uses'=> 'Auth\AuthController@postLogin']);
 
 $app->group(['middleware' => 'CORS'], function($app) {
-    $app->get('/', function () use ($app) {
-        return [
-            'success' => [
-                'app' => $app->version(),
-            ],
-        ];
-    });
+//    $app->get('/', function () use ($app) {
+//        return [
+//            'success' => [
+//                'app' => $app->version(),
+//            ],
+//        ];
+//    });
 
 
 
@@ -37,9 +37,9 @@ $app->group(['middleware' => 'CORS'], function($app) {
 
     $app->get('/roles', ['as'=>'Role.Read', 'uses'=>'App\Http\Controllers\RoleController@show']);
     $app->get('/roles/{id:\d+}',['as'=>'Role.Read','uses'=>'App\Http\Controllers\RoleController@view']);
+    $app->put('/roles/{id:\d+}',['as'=>'Role.Update','uses'=>'App\Http\Controllers\RoleController@update']);
     $app->post('/roles',['as'=>'Role.Create','uses'=>'App\Http\Controllers\RoleController@store']);
 
-    $app->get('/groups',['as'=>'Group.Read','uses'=>'App\Http\Controllers\RoleController@show']);
 
     $app->get('/agents',['as'=>'Agents.Read','uses'=>'App\Http\Controllers\AgentController@show']);
 

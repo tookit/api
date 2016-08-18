@@ -49,9 +49,6 @@ class RoleController extends Controller {
 
     public function view($id)
     {
-        if(!Gate::allows('Role.Read')){
-            abort(403);
-        }
         $item = $this->repository->find($id);
         return $this->buildItemResponse($item, New RoleTransformer());
     }
@@ -59,14 +56,45 @@ class RoleController extends Controller {
     public function store(Request $request)
     {
 
-        $this->validate($request,[
+        $this->validate($request, [
+            'name' => 'required|max:255|unique:role',
+            'description' => 'max:255',
+//            'roles'=>'digits:1',
 
-            'name'=>'required|unique:user|max:60',
-            'description'=>'max:255'
+        ]);
+        $item = Role::create($request->input());
+        $item->save();
+        $permissionsID = $request->input('permissions');
+        if($permissionsID){
+            $item->permissions()->sync($permissionsID);
+        }
+        return  response()->json([
+            'message'=>'Role created.',
+            'data' => $item->toArray()
         ]);
 
     }
 
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255|unique:role',
+            'description' => 'max:255',
+//            'email'=>'required|max:255|unique:user,email,'.$id,
+//            'roles'=>'digits:1',
+
+        ]);
+
+        $item = Role::find($id);
+        $item->name = $request->input('name');
+        $item->description = $request->input('description');
+        $item->save();
+        $permissionsId = $request->input('permissions');
+        if($permissionsId){
+            $item->permissions()->sync($permissionsId);
+        }
+        return response()->json(['message'=>'updated']);
+    }
 
     public function destroy()
     {
