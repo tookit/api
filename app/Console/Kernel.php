@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
 
         \App\Console\Commands\RoutesCommand::class,
         \App\Console\Commands\PermissionsCommand::class,
+        \App\Console\Commands\InstanceCommand::class,
         \Prettus\Repository\Generators\Commands\TransformerCommand::class,
         \Prettus\Repository\Generators\Commands\ControllerCommand::class,
         //

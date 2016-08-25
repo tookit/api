@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         if($request->isMethod('OPTIONS')) {
             $this->app->options($request->path(), function(Response $response){
                 $response->header('Access-Control-Allow-Origin', '*');
-                $response->header('Access-Control-Allow-Headers', 'content-type');
+                $response->header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
                 $response->header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, OPTIONS');
                 return $response;
             });

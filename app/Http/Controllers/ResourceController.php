@@ -39,7 +39,7 @@ class ResourceController extends Controller {
     {
 
         $collection =  $this->repository->paginate();
-        return $this->buildCollectionResponse($collection,new UserTransformer());
+        return $this->buildCollectionResponse($collection,new ResourceTransformer());
 
     }
 
@@ -47,7 +47,7 @@ class ResourceController extends Controller {
     public function view($id)
     {
         $item = $this->repository->find($id);
-        return $this->buildItemResponse($item, New UserTransformer());
+        return $this->buildItemResponse($item, New ResourceTransformer());
     }
 
 
